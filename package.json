@@ -1,0 +1,54 @@
+{
+  "name": "fast-food",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dobahoan2792000/fast-food-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/dobahoan2792000/fast-food-api/issues"
+  },
+  "homepage": "https://github.com/dobahoan2792000/fast-food-api#readme",
+  "dependencies": {
+    "api-query-params": "^5.2.0",
+    "axios": "^0.24.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.27.1",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dayjs": "^1.10.7",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "mongoose": "^6.0.8",
+    "mongoose-delete": "^0.5.4",
+    "mongoose-keywords": "^0.4.1",
+    "mongoose-sequence": "^5.3.1",
+    "mongoose-slug-generator": "^1.0.4",
+    "mongoose-slug-plugin": "^2.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "nodemon": "^2.0.13",
+    "passport": "^0.5.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "pug": "^3.0.2",
+    "query-string": "^7.0.1",
+    "random-token": "^0.0.8",
+    "sharp": "^0.29.1"
+  }
+}
