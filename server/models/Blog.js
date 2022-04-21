@@ -18,20 +18,13 @@ const blogSchema = new Schema(
       ref: "DanhMucBlog",
       required: true,
     },
-    IDAnh: {
-      type: Number,
-      ref: "HinhAnh",
-    },
     TieuDe: {
       type: String,
       required: true,
     },
-    TomTat: {
-      type: String,
-      required: true,
-    },
-    NoiDung: {
-      type: String,
+    IDAnh: {
+      type: Number,
+      ref: "HinhAnh",
       required: true,
     },
     Comments: [
@@ -54,6 +47,14 @@ const blogSchema = new Schema(
         }
       },
     ],
+    TomTat: {
+      type: String,
+      required: true,
+    },
+    NoiDung: {
+      type: String,
+      required: true,
+    },
     slug: {
       type: String,
       slug: "TieuDe",
@@ -70,7 +71,7 @@ blogSchema.plugin(AutoIncrement, { id: "blog_id", inc_field: "_id" });
 blogSchema.plugin(mongoose_delete, {
   deletedAt: true,
   overrideMethods: "all",
-  withDeleted: true,
+  withDeleted: true
 });
 const blog = mongoose.model("Blog", blogSchema);
 export default blog;

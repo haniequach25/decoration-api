@@ -4,7 +4,7 @@ import {
     create,
     update,
     remove,
-  } from "../controllers/DanhMucBlogController.js";
+  } from "../controllers/DanhMucSPController.js";
   import passport from "../../services/passport/index.js";
   import express from "express";
   import { middleware as query } from "../querymen.js";

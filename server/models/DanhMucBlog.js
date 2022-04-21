@@ -6,7 +6,7 @@ import { cleanAccents } from '../../services/format/index.js';
 
 const AutoIncrement = AutoInrement(mongoose)
 const Schema = mongoose.Schema;
-// table
+
 const danhMucBlogSchema = new Schema({
     _id: Number,
     TenDanhMucBlog:{
@@ -14,13 +14,11 @@ const danhMucBlogSchema = new Schema({
         required: true
     },
 }, { timestamps : true })
-// tạo keyword tìm kiếm
+
 danhMucBlogSchema.plugin(mongooseKeywords, {
     paths: ['_id', 'TenDanhMucBlog']
-})
-// tăng id
+  })
 danhMucBlogSchema.plugin(AutoIncrement,{id: 'categoryblog_id', inc_field: '_id'})
-
 danhMucBlogSchema.plugin(mongoose_delete, {
     deletedAt: true,
     overrideMethods: "all",

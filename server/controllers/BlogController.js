@@ -1,15 +1,11 @@
 import Blog from "../models/Blog.js";
 const index = ({ querymen: { query, select, cursor } }, res, next) => {
   if (query.keywords) {
-    query.keywords =
-      query.keywords instanceof RegExp
-        ? query.keywords
-        : new RegExp(query.keywords, "i");
+    query.keywords = (query.keywords instanceof RegExp) ? query.keywords : new RegExp((query.keywords), 'i')
   }
   Blog.count(query)
     .then((count) => {
-      return Blog.find(query, select, cursor)
-        .sort({ createdAt: -1 })
+      return Blog.find(query, select, cursor).sort({ createdAt: -1 })
         .populate({
           path: "DanhMucBlog",
           options: { withDeleted: true },
@@ -37,7 +33,6 @@ const index = ({ querymen: { query, select, cursor } }, res, next) => {
       return res.status(200).json(data);
     })
     .catch((err) => {
-      console.log(err);
       return res.status(500).json({ message: err.message });
     });
 };
@@ -50,19 +45,19 @@ const show = ({ params }, res, next) => {
   }
   if (q)
     Blog.findOne(q)
-      .populate({
-        path: "DanhMucBlog",
-        options: { withDeleted: true },
-      })
-      .populate({
-        path: "IDAnh",
-        field: "source",
-        options: { withDeleted: true },
-      })
-      .populate({
-        path: "TaiKhoan",
-        options: { withDeleted: true },
-      })
+    .populate({
+      path: "DanhMucBlog",
+      options: { withDeleted: true },
+    })
+    .populate({
+      path: "IDAnh",
+      field: "source",
+      options: { withDeleted: true },
+    })
+    .populate({
+      path: "TaiKhoan",
+      options: { withDeleted: true },
+    })
       .then((p) => p)
       .then((data) => {
         return res.status(200).json({ data });

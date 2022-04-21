@@ -24,14 +24,23 @@ const userSchema = new Schema(
       required: true,
       minlength: 6,
     },
-    TenTacGia: {
+    TenNhanVien: {
       type: String,
       index: true,
       trim: true,
     },
+    TrangThai: {
+      type: Boolean,
+      required: true,
+    },
     SDT: {
       type: String,
       trim: true,
+    },
+    roles: {
+      type: Number,
+      enum: [0, 1],
+      required: true,
     },
     Avatar: {
       type: Number,

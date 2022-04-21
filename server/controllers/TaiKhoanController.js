@@ -31,7 +31,6 @@ const index = ({ querymen: { query, select, cursor } }, res, next) => {
 };
 const register = async (req, res) => {
   try {
-    console.log("Hello")
     const checkEmail = await TaiKhoan.find({ email: req.body.email });
     console.log(req.body)
     if (checkEmail && checkEmail.length) {
@@ -51,9 +50,12 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const user = req.user;
-    const token = jwt.sign(user, process.env.JWT_KEY);
+    if(user.user.TrangThai == true){
+      const token = jwt.sign(user, process.env.JWT_KEY);
     return res.status(200).json({ ...user, token });
-    
+    }else{
+      return res.status(500).json({ message : "Tài khoản bị khóa "})
+    }
   } catch (err) {
     return res.status(401).json({ message: "Có lỗi không cấp quyền đăng nhập được" });
   }
@@ -61,7 +63,11 @@ const login = async (req, res) => {
 // get me 
 const userInfo = (req, res) => {
   try{
-    return res.status(200).json(req.user)
+    if(req.user.user.TrangThai == true){
+      return res.status(200).json(req.user)
+    }else{
+      return res.status(401).json({ message : 'User blocked'})
+    }
   }catch(err){
     return res.status(401).json({ message: err.message });
   }
