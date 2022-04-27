@@ -147,7 +147,7 @@ const create = async (req, res) => {
         donhang.populate([
           {
             path: "items.sanpham",
-            fields: 'AnhMoTa TenSanPham',
+            fields: "AnhMoTa TenSanPham",
             populate: {
               path: "AnhMoTa",
               fields: "source",
@@ -158,17 +158,15 @@ const create = async (req, res) => {
       )
       .then(async (data) => {
         const adminTitle = "New order from Fast Food";
-        console.log(data.items[0].sanpham.AnhMoTa)
-        await sendGmail(
-          {
-            to: data.email,
-            subject: `New order from PinupVintageHouse.com [${data._id}]`,
-            message: pug.renderFile(`${__dirname}/template.pug`, {
-              title: adminTitle,
-              order: data,
-            }),
-          }
-        );
+        console.log(data.items[0].sanpham.AnhMoTa);
+        await sendGmail({
+          to: data.email,
+          subject: `New order from PinupVintageHouse.com [${data._id}]`,
+          message: pug.renderFile(`${__dirname}/template.pug`, {
+            title: adminTitle,
+            order: data,
+          }),
+        });
         return data;
       })
       .then((data) => {
@@ -196,11 +194,9 @@ const update = async (req, res) => {
               return i._id.toString() === item.sanpham._id.toString();
             });
             if (!p) {
-              return res
-                .status(500)
-                .json({
-                  message: `Không tìm thấy sản phẩm id = ${item.sanpham}`,
-                });
+              return res.status(500).json({
+                message: `Không tìm thấy sản phẩm id = ${item.sanpham}`,
+              });
             } else if (
               p.SoLuong < 1 &&
               !order.items
@@ -244,4 +240,4 @@ const remove = async (req, res) => {
     .catch((err) => res.status(500).json({ message: err.message }));
 };
 
-export { index, create, update, remove, show, momo, filter };
+export { index, create, update, remove, show, filter };
