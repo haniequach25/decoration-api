@@ -43,8 +43,9 @@ const blogSchema = new Schema(
         },
         date: {
           type: Date,
-          required: true
-        }
+          required: true,
+          default: Date.now(),
+        },
       },
     ],
     TomTat: {
@@ -71,7 +72,7 @@ blogSchema.plugin(AutoIncrement, { id: "blog_id", inc_field: "_id" });
 blogSchema.plugin(mongoose_delete, {
   deletedAt: true,
   overrideMethods: "all",
-  withDeleted: true
+  withDeleted: true,
 });
 const blog = mongoose.model("Blog", blogSchema);
 export default blog;

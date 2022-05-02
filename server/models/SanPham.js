@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 // import mongooseSlug from "mongoose-slug-generator";
 import mongooseKeywords from "mongoose-keywords";
 import AutoInrement from "mongoose-sequence";
-import mongoSlug from 'mongoose-slug-plugin'
+import mongoSlug from "mongoose-slug-plugin";
 import dayjs from "dayjs";
 import { cleanAccents } from "../../services/format/index.js";
 const AutoIncrement = AutoInrement(mongoose);
@@ -10,7 +10,7 @@ const Schema = mongoose.Schema;
 const sanphamSchema = new Schema(
   {
     codeCounter: Number,
-    code:{
+    code: {
       type: String,
       maxlength: 20,
       unique: true,
@@ -57,19 +57,30 @@ const sanphamSchema = new Schema(
           type: String,
           required: true,
         },
+        rating: {
+          type: Number,
+          min: 1,
+          max: 5,
+          default: 5,
+        },
         email: {
           type: String,
           required: true,
         },
         date: {
           type: Date,
-          required: true
-        }
+          required: true,
+          default: Date.now(),
+        },
       },
     ],
     DanhMucSP: {
       type: Number,
       ref: "DanhMucSanPham",
+    },
+    averageRating: {
+      type: Number,
+      default: 5,
     },
   },
   { timestamps: true }
@@ -106,11 +117,11 @@ sanphamSchema.path("codeCounter").set(function (counter) {
 sanphamSchema.plugin(AutoIncrement, { inc_field: "codeCounter" });
 
 sanphamSchema.plugin(mongooseKeywords, {
-  paths: ["code", "TenSanPham"]
+  paths: ["code", "TenSanPham"],
 });
 sanphamSchema.plugin(mongoSlug, {
   tmpl: "<%=TenSanPham%>-<%=dayjs(new Date()).format('YYYY-MM-DD-HH-mm-ss')%>",
-  locals: { dayjs }
+  locals: { dayjs },
 });
 // sanphamSchema.plugin(AutoIncrement, { id: "product_id", inc_field: "_id" });
 // sanphamSchema.plugin(mongoose_delete, {
@@ -118,7 +129,6 @@ sanphamSchema.plugin(mongoSlug, {
 //   overrideMethods: "all",
 //   withDeleted: true
 // });
-
 
 const sanpham = mongoose.model("SanPham", sanphamSchema);
 export default sanpham;

@@ -1,6 +1,6 @@
 import Product from "../models/SanPham.js";
 import DonHang from "../models/DonHang.js";
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 import { cleanAccents } from "../../services/format/index.js";
 
 const index = ({ querymen: { query, select, cursor } }, res, next) => {
@@ -13,7 +13,8 @@ const index = ({ querymen: { query, select, cursor } }, res, next) => {
   }
   Product.count(query)
     .then((count) => {
-      return Product.find(query, select, cursor).sort({ createdAt: -1 })
+      return Product.find(query, select, cursor)
+        .sort({ createdAt: -1 })
         .populate({
           path: "DanhMucSP",
           options: {
@@ -65,7 +66,7 @@ const show = async ({ params }, res) => {
         withDeleted: true,
       },
     })
-    .then((p) => (p))
+    .then((p) => p)
     .then((data) => {
       return res.status(200).json({ data });
     })
@@ -93,12 +94,16 @@ const update = async (req, res) => {
 };
 const remove = async (req, res) => {
   try {
-    const order = await DonHang.findOne({ items: { $elemMatch : { sanpham: req.params.id } } })
-    if(order){
-      return res.status(500).json({ message: `Product currently in order ${order._id}` });
+    const order = await DonHang.findOne({
+      items: { $elemMatch: { sanpham: req.params.id } },
+    });
+    if (order) {
+      return res
+        .status(500)
+        .json({ message: `Product currently in order ${order._id}` });
     }
     Product.findOne({ _id: req.params.id })
-    .then((product) => product ? product.remove() : null)
+      .then((product) => (product ? product.remove() : null))
       .then(() => res.status(201).json({ message: "Delete success" }))
       .catch((err) => {
         console.log(err);
@@ -109,21 +114,33 @@ const remove = async (req, res) => {
   }
 };
 const comment = async (req, res) => {
-  console.log(req.body);
-  Blog.updateOne(
-    { _id: req.params.id },
-    {
-      $push: {
-        Comments: {
-          commenter: req.body.commenter,
-          content: req.body.content,
-          email: req.body.email,
-          date: req.body.date,
+  try {
+    await Product.updateOne(
+      { _id: req.params.id },
+      {
+        $push: {
+          Comments: {
+            commenter: req.body.commenter,
+            content: req.body.content,
+            email: req.body.email,
+            date: req.body.date,
+            rating: req.body.rating,
+          },
         },
-      },
+      }
+    );
+    const product = await Product.findOne({ _id: req.params.id });
+    if (product.Comments && product.Comments.length > 0) {
+      const averageRating = product.Comments.map((p) => p.rating).reduce(
+        (a, b) => a + b,
+        0
+      );
+      product.averageRating = averageRating / product.Comments.length;
+      await product.save();
     }
-  )
-    .then(() => res.status(201).json({ message: "Comment success" }))
-    .catch((err) => res.status(500).json({ message: err.message }));
+    return res.status(201).json({ message: "Comment success" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
 };
 export { index, show, create, update, remove, comment };
