@@ -9,16 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dobahoan2792000/fast-food-api.git"
+    "url": "git+https://github.com/haniequach25/decoration-api.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/dobahoan2792000/fast-food-api/issues"
+    "url": "https://github.com/haniequach25/decoration-api/issues"
   },
-  "homepage": "https://github.com/dobahoan2792000/fast-food-api#readme",
+  "homepage": "https://github.com/haniequach25/decoration-api#readme",
   "dependencies": {
     "api-query-params": "^5.2.0",
     "axios": "^0.24.0",
