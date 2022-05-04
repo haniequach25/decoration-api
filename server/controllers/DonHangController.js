@@ -1,6 +1,5 @@
 import DonHang from "../models/DonHang.js";
 import SanPham from "../models/SanPham.js";
-import crypto from "crypto";
 import pug from "pug";
 import { sendGmail } from "../../services/nodemailer/index.js";
 import path from "path";
@@ -158,9 +157,8 @@ const create = async (req, res) => {
       )
       .then(async (data) => {
         const adminTitle = "New order from Fast Food";
-        console.log(data.items[0].sanpham.AnhMoTa);
         await sendGmail({
-          to: data.email,
+          to: data.email || 'senpaione33@gmail.com',
           subject: `New order from PinupVintageHouse.com [${data._id}]`,
           message: pug.renderFile(`${__dirname}/template.pug`, {
             title: adminTitle,

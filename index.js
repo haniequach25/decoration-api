@@ -8,6 +8,7 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import passport from './services/passport/index.js'
+
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -28,6 +29,7 @@ app.use(
 app.use(passport.initialize())
 app.use(morgan("dev"));
 dotenv.config();
+
 route(app);
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
