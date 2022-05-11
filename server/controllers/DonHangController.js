@@ -156,10 +156,10 @@ const create = async (req, res) => {
         ])
       )
       .then(async (data) => {
-        const adminTitle = "New order from Fast Food";
+        const adminTitle = "New order from HAUT corner";
         await sendGmail({
-          to: data.email || 'senpaione33@gmail.com',
-          subject: `New order from PinupVintageHouse.com [${data._id}]`,
+          to: data.email || "senpaione33@gmail.com",
+          subject: `New order from HAUT corner [${data._id}]`,
           message: pug.renderFile(`${__dirname}/template.pug`, {
             title: adminTitle,
             order: data,
