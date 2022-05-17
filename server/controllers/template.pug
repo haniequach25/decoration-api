@@ -27,7 +27,7 @@ table(border='0' cellpadding='0' cellspacing='0' width='100%')
                             a(href='#' target='_blank' style='color: #ffffff; text-decoration: none;') Shop &nbsp;
                         td(style='font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 24px;')
                           a(href='#' target='_blank' style='color: #ffffff; text-decoration: none;')
-                            img(src='https://image.flaticon.com/icons/png/512/575/575577.png' width='27' height='23' style='display: block; border: 0px;')
+                            img(src='https://scontent.fhan6-1.fna.fbcdn.net/v/t39.30808-6/271225614_118205227388095_543399018231103376_n.jpg?stp=cp0_dst-jpg_e15_fr_q65&_nc_cat=111&ccb=1-6&_nc_sid=85a577&efg=eyJpIjoidCJ9&_nc_ohc=XLCNpy8xAQwAX-JUwnP&_nc_ht=scontent.fhan6-1.fna&oh=00_AT_hxFmOfrJtZwaPT0pafltMyCsh_s4YbeH0kHuOCaXRnQ&oe=62875980' width='27' height='23' style='display: block; border: 0px;')
         tr
           td(align='center' style='padding: 35px 35px 20px 35px; background-color: #ffffff;' bgcolor='#ffffff')
             table(align='center' border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width:600px;')
@@ -49,7 +49,7 @@ table(border='0' cellpadding='0' cellspacing='0' width='100%')
                             td(width='25%' align='left' bgcolor='#eeeeee' style='font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;')
                                 img(src=item.sanpham.AnhMoTa[0].source alt=item.sanpham.TenSanPham width='100' height='100')
                             td(width='75%' align='left' bgcolor='#eeeeee' style='color: #ffffff; font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;')
-                                a(href='https://fast-food-website-lmg.netlify.app/products/' + item.sanpham.slug)= item.sanpham.TenSanPham
+                                a(href='http://localhost:8080/products/' + item.sanpham.slug)= item.sanpham.TenSanPham
               tr
                 td(align='left' style='padding-top: 20px;')
                   table(cellspacing='0' cellpadding='0' border='0' width='100%')
@@ -66,7 +66,6 @@ table(border='0' cellpadding='0' cellspacing='0' width='100%')
                     table(align='left' border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width:300px;')
                       tr
                         td(align='left' valign='top' style='font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px;')
-                          p(style='font-weight: 800;') Name: #{order.MaKhachHang.TenKhachHang}
                           p Phone number: #{order.SDT}
                           p Email: #{order.email}
                           p Shipping Address: 

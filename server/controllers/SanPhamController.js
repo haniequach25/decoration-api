@@ -11,6 +11,9 @@ const index = ({ querymen: { query, select, cursor } }, res, next) => {
         ? query.keywords
         : new RegExp(query.keywords, "i");
   }
+  if (query.TenSanPham) {
+    query.TenSanPham = new RegExp(query.TenSanPham, "i");
+  }
   Product.count(query)
     .then((count) => {
       return Product.find(query, select, cursor)
